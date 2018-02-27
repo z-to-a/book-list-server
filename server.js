@@ -5,7 +5,7 @@ const cors = require('cors');
 const pg = require('pg');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 const CLIENT_URL = process.env.CLIENT_URL;
 
 const client = new pg.Client(process.env.DATABASE_URL);
