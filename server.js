@@ -3,6 +3,8 @@
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
+//todo - finish body parser function (at 4:24 in video)
+const bodyParser = require ()
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -14,6 +16,23 @@ app.use(cors());
 
 app.get('/api/v1/books',(request, response) => {
   client.query(`SELECT book_id, title,author, image_url, isbn, FROM books;`).then(results => response.send(results.rows)).catch(console.error);
+});
+
+app.get('/*',(request, response) =>
+  response.redirect(CLIENT_URL)
+);
+
+app.post('/books/add', bodyParser, (request,response)=> {
+  //todo: inerst the new task into the database, pass the results back to the frontend, and catch any errors
+
+  //this is called destructuring (instead of example line of 5 the long way)
+  let {title, author, isbn, image_url, description} = req.body;
+  console.log(title);
+  //let title = req.body.title; etc. is alternate method without destructuring
+  client.query(`
+  INSERT INTO books(title, author, isbn, image_url,descriptions) VALUES ($1, $2, $3, $4,$5);`,[title,author, isbn, image_url, description])
+    .then(() => response.sendStatus(201))
+    .catch(console.error);
 });
 
 app.listen(PORT, ()=> console.log(`listening on PORT:${PORT}`));
