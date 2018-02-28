@@ -3,8 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
-//todo - finish body parser function (at 4:24 in video)
-const bodyParser = require ()
+const bodyParser = require('body-parser').urlencoded({extended:true});
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -12,10 +11,15 @@ const CLIENT_URL = process.env.CLIENT_URL;
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
+client.on('error', err => console.error(err));
 app.use(cors());
 
+// NOT SURE IF WE NEED THIS?
+// app.use(express.static('/index'));
+
+
 app.get('/api/v1/books',(request, response) => {
-  client.query(`SELECT book_id, title,author, image_url, isbn, FROM books;`).then(results => response.send(results.rows)).catch(console.error);
+  client.query(`SELECT book_id, title,author, image_url, isbn FROM books;`).then(results => response.send(results.rows)).catch(console.error);
 });
 
 app.get('/*',(request, response) =>
@@ -23,12 +27,12 @@ app.get('/*',(request, response) =>
 );
 
 app.post('/books/add', bodyParser, (request,response)=> {
-  //todo: inerst the new task into the database, pass the results back to the frontend, and catch any errors
+  //This new task inserts a new row into the database, passes the results back to the frontend and catches any errors
 
-  //this is called destructuring (instead of example line of 5 the long way)
+  //this way of writing the code is called destructuring (
   let {title, author, isbn, image_url, description} = req.body;
   console.log(title);
-  //let title = req.body.title; etc. is alternate method without destructuring
+
   client.query(`
   INSERT INTO books(title, author, isbn, image_url,descriptions) VALUES ($1, $2, $3, $4,$5);`,[title,author, isbn, image_url, description])
     .then(() => response.sendStatus(201))
