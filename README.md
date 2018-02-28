@@ -2,7 +2,7 @@
 
 **Authors**: Rebecca Prows and Suzanne Richman 
 
-**Version**: 1.0.1
+**Version**: 1.0.2
 
 ## Overview
 
@@ -19,7 +19,8 @@
 2/27/2018
 9:40 - add eslintrc file
 11:45 - created and pushed database to Heroku for model and updated server.js with correct connections
-
+2/28/2018
+10:00 am updated changes from yesterday's class review, file structure check, etc.
 
 
 ## Credits and Collaborations
