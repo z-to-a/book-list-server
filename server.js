@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 3000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:8080';
 const DATABASE_URL = 'postgres://localhost:5432/books_app';
 
+const TOKEN = process.env.TOKEN;
+
 const client = new pg.Client(DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
@@ -23,10 +25,11 @@ app.get('/api/v1/books',(request, response) => {
     response.send(results.rows)
   }).catch(console.error);
 });
-app.get('/books/:id', (request, response) => {
-  client.query(`SELECT * FROM books WHERE id=book_id;`)
+app.get('/books/:book_id', (request, response) => {
+  console.log('this is a book');
+  client.query(`SELECT * FROM books WHERE book_id=${request.params.book_id};`)
     .then(results => {
-      console.log(results,'this is a book');
+     
       response.send(results.rows[0])})
     .catch(console.error);
 });
