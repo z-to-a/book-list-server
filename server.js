@@ -22,13 +22,14 @@ app.get('/api/v1/books',(request, response) => {
   console.log('server get route triggered')
   client.query(`SELECT title, author, isbn, image_url, book_id FROM books;`).then(results => {
     // console.log(results,'these are the results');
-      response.send(results.rows)
-    }).catch(console.error);
+    response.send(results.rows)
+  }).catch(console.error);
 });
-app.get('/books/:id', (request, response) => {
-  client.query(`SELECT * FROM books WHERE id=book_id;`)
+app.get('/books/:book_id', (request, response) => {
+  console.log('this is a book');
+  client.query(`SELECT * FROM books WHERE book_id=${request.params.book_id};`)
     .then(results => {
-      console.log(results,'this is a book');
+     
       response.send(results.rows[0])})
     .catch(console.error);
 });
