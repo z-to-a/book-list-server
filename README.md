@@ -2,7 +2,7 @@
 
 **Authors**: Rebecca Prows and Suzanne Richman 
 
-**Version**: 1.0.2
+**Version**: 1.0.3 (1.0.3 only by Suzanne Richman)
 
 ## Overview
 
@@ -21,6 +21,8 @@
 11:45 - created and pushed database to Heroku for model and updated server.js with correct connections
 2/28/2018
 10:00 am updated changes from yesterday's class review, file structure check, etc.
+3/2/2018
+9:08 pm update server to display print detail correctly and started to work on form, but stopped due to weekend assignment time-box.
 
 
 ## Credits and Collaborations
